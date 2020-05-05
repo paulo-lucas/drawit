@@ -32,7 +32,7 @@ document.addEventListener('DOMContentLoaded', () => {
   let cooldown = 0;
 
   screen.width = 800;
-  screen.height = 600;
+  screen.height = 500;
 
   ctx.lineWidth = 5;
 
