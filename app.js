@@ -2,13 +2,14 @@ const express = require('express');
 const app = express();
 const http = require('http');
 const server = http.createServer(app);
+const port = process.env.PORT || 3000;
 
 const socketIo = require('socket.io');
 
 const io = socketIo.listen(server);
 
-server.listen(3000, () => {
-  console.log('RUNNING')
+server.listen(port, () => {
+  console.log('Running at port '+port);
 });
 
 app.use(express.static(__dirname + "/public"));
