@@ -13,7 +13,7 @@ server.listen(3000, () => {
 
 app.use(express.static(__dirname + "/public"));
 
-const historico = [];
+let history = [];
 
 const colors = [
   '#ff0000',
@@ -33,16 +33,17 @@ io.on('connection', (socket) => {
   socket.emit('defineColor', colors[counter%9]);
   counter++;
 
-  historico.forEach(line => {
+  history.forEach(line => {
     socket.emit('draw', line);
   });
 
   socket.on('erase', () => {
     io.emit('erase');
+    history = [];
   });
 
   socket.on('draw', (line) => {
-    historico.push(line);
+    history.push(line);
     io.emit('draw', line);
   });
 });

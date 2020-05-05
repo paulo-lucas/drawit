@@ -12,6 +12,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const socket = io.connect();
 
   socket.on('defineColor', (color) => {
+    const titleSpan = document.querySelector('#title-color');
+    titleSpan.style.color = color;
     brush.color = color;
   });
 
