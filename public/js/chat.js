@@ -1,11 +1,16 @@
 document.addEventListener('DOMContentLoaded', () => {
 
+  socket.on('delete', () => {
+    const messages = document.querySelector('#messages');
+    messages.innerHTML = "";
+  });
+
   socket.on('message', (message) => {
     appendMessage(message);
   });
 
+  
 
-  const messagesContainer = document.querySelector("#messages-container");
   const btn = document.querySelector("#btn-send");
 
   btn.addEventListener('click', (e) => {
@@ -23,6 +28,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   //função principal de exibição
   const appendMessage = (message) => {
+    const messagesContainer = document.querySelector("#messages-container");
     const messages = document.querySelector("#messages");
     const { messageContent, color, usr } = message;
     const div = document.createElement("div");

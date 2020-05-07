@@ -153,6 +153,7 @@ body{
   padding: 10px;
   margin: 5px 15px;
   display: inline-block;
+  box-shadow: 0 5px 10px black;
   opacity: 0.6;
 }
 
