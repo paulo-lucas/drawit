@@ -1,21 +1,4 @@
-
-const brush = {
-    color: undefined,
-    active: false,
-    moving: false,
-    pos: {x:0, y:0},
-    posBefore: {x:null, y:null}
-  }
 document.addEventListener('DOMContentLoaded', () => {
-  
-
-  const socket = io.connect();
-
-  socket.on('defineColor', (color) => {
-    const titleSpan = document.querySelector('#title-color');
-    titleSpan.style.color = color;
-    brush.color = color;
-  });
 
   socket.on('draw', (line) => {
     drawLine(line);
@@ -25,7 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
     ctx.clearRect(0, 0, screen.width, screen.height);
   });
 
-  
+
   const screen = document.querySelector('#screen');
   const ctx = screen.getContext('2d');
   const btn = document.querySelector('.btn');
@@ -44,20 +27,26 @@ document.addEventListener('DOMContentLoaded', () => {
     ctx.stroke();
   }
 
-  screen.onmousedown = (event) => {brush.active = true}
-  screen.onmouseup = (event) => {brush.active = false}
+  screen.onmousedown = (event) => { brush.active = true }
+  screen.onmouseup = (event) => { brush.active = false }
   screen.onmousemove = (event) => {
-    brush.pos.x = (event.clientX - (window.innerWidth/2 - screen.width/2));
-    brush.pos.y = (event.clientY - (window.innerHeight/2 - screen.height/2));
+    const viewportOffset = screen.getBoundingClientRect();
+
+    brush.pos.x = (event.clientX - viewportOffset.left);
+    brush.pos.y = (event.clientY - viewportOffset.top);
     brush.moving = true;
   }
 
   const cycle = () => {
-    if(brush.active && brush.moving && brush.posBefore){
-      socket.emit('draw', {color: brush.color, pos: brush.pos, posBefore: brush.posBefore})
+    if (brush.active && brush.moving && brush.posBefore) {
+      socket.emit('draw', { 
+        color: brush.color, 
+        pos: brush.pos, 
+        posBefore: brush.posBefore 
+      });
       brush.moving = false;
     }
-    brush.posBefore = { x: brush.pos.x, y: brush.pos.y};
+    brush.posBefore = { x: brush.pos.x, y: brush.pos.y };
 
     setTimeout(cycle, 10);
   }
@@ -72,18 +61,18 @@ document.addEventListener('DOMContentLoaded', () => {
     count.innerText = cooldown;
     let seconds = setInterval(() => {
       cooldown -= 1;
-      count.innerText =  cooldown;
-      if(!cooldown){
+      count.innerText = cooldown;
+      if (!cooldown) {
         btn.disabled = false;
         btn.classList.remove('disabled-btn');
         clearInterval(seconds);
       }
     }, 1000);
-    
+
   });
 
   function decrementSeconds(interval, count) {
-    
+
   }
 
   cycle();

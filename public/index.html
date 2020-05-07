@@ -4,28 +4,64 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="css/style.css">
+
   <script src="socket.io/socket.io.js"></script>
-  <script src="script.js"></script>
+  <script src="js/global.js"></script>
+  <script src="js/screen.js"></script>
+  <script src="js/chat.js"></script>
+  <script src="js/modal.js"></script>
+
   <title>Draw It</title>
 </head>
 
 <body>
-  <div id="controls">
-    <button class="btn">Erase</button>
-    <p id="cd">Cooldown <span id="count">0</span></p>
+  <div id="mobile-message">
+    <h1>Sorry, our web application doesn't support mobile screens yet.</h1>
+    <img src="ico/broken-heart.png" alt="Broken heart.">
   </div>
+
+
+  <div id="modal" class="modal">
+    <div class="modal-content">
+      <form>
+        <input type="text" id="username" placeholder="Enter your username..." maxlength="16" autocomplete="off">
+        <button type="submit" id="done-username">Done</button>
+      </form>
+    </div>
+
+  </div>
+
   <div id="title">
     <h1><span id="title-color">D</span>raw It</h1>
     <p>Draw with everyone</p>
   </div>
 
   <div class="container">
+    <div id="screenbox">
 
-    <canvas id="screen">
+      <canvas id="screen">
+      </canvas>
 
-    </canvas>
+      <div id="controls">
+        <button class="btn">Erase</button>
+        <p id="cd">Cooldown <span id="count">0</span></p>
+      </div>
+    </div>
+
+    <div id="chatbox">
+      <div id="messages-container">
+        <div id="messages">
+
+        </div>
+      </div>
+      <form id="send">
+        <input type="text" id="messageTXT" placeholder="Type your message..." maxlength="32" autocomplete="off">
+        <button id="btn-send"><img src="ico/up-arrow-24.png" alt="Enviar"></button>
+      </form>
+    </div>
   </div>
 </body>
 

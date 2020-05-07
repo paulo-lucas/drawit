@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 const http = require('http');
 const server = http.createServer(app);
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 3333;
 
 const socketIo = require('socket.io');
 
@@ -14,7 +14,8 @@ server.listen(port, () => {
 
 app.use(express.static(__dirname + "/public"));
 
-let history = [];
+let colorHistory = [];
+let messageHistory = [];
 
 const colors = [
   '#ff0000',
@@ -23,7 +24,7 @@ const colors = [
   '#ff6600',
   '#009999',
   '#9900cc',
-  '#ffff00',
+  '#ffcc00',
   '#0099ff',
   '#ff0099'
 ]
@@ -34,17 +35,26 @@ io.on('connection', (socket) => {
   socket.emit('defineColor', colors[counter%9]);
   counter++;
 
-  history.forEach(line => {
+  colorHistory.forEach(line => {
     socket.emit('draw', line);
+  });
+
+  messageHistory.forEach(message => {
+    socket.emit('message', message);
+  });
+
+  socket.on('draw', (line) => {
+    colorHistory.push(line);
+    io.emit('draw', line);
+  });
+
+  socket.on('message', (message) => {
+    messageHistory.push(message);
+    io.emit('message', message);
   });
 
   socket.on('erase', () => {
     io.emit('erase');
-    history = [];
-  });
-
-  socket.on('draw', (line) => {
-    history.push(line);
-    io.emit('draw', line);
+    colorHistory = [];
   });
 });

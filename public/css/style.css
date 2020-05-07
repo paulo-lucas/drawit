@@ -1,0 +1,284 @@
+*{
+  margin: 0;
+  padding: 0;
+}
+
+body{
+  font-family: 'Poppins', sans-serif;
+  background-color: #e9e9e9;
+}
+
+#mobile-message{
+  display: none;
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+}
+
+#mobile-message h1{
+  color: #555;
+  text-align: center;
+}
+
+#mobile-message img{
+  width: 100px;
+}
+
+#title{
+  width: 300px;
+  height: 10vh;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#title p{
+  color: #777;
+}
+
+.container{
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-around;
+  align-items: flex-end;
+}
+
+#screenbox{
+  width: 840px;
+  height: 90%;
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  justify-content: space-between;
+}
+
+#screen{
+  background-color: #fff;
+  width: 800px;
+  height: 500px;
+  border: 2px solid;
+  border-radius: 10px;
+}
+
+#controls{
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+}
+
+.btn{
+  width: 600px;
+  padding: 20px;
+  margin: 0 0 20px 0;
+  border-radius: 10px;
+  font-size: 1.2rem;
+  outline: none;
+  border: none;
+  background-color: #ff0000;
+  cursor: pointer;
+  color: #fff;
+  font-weight: bold;
+  background-size: 200%;
+  transition: .2s;
+}
+
+.btn:hover{
+  background-color: #f55;
+  transform: translateY(-10px);
+  box-shadow: 0 10px 0 black
+}
+
+.btn:active{
+  transform: translateY(0);
+  box-shadow: none;
+}
+
+.disabled-btn{
+  background-color: #555;
+}
+
+.disabled-btn:hover{
+  background-color: #777;
+  transform: translateY(0);
+  box-shadow: none;
+}
+
+#cd{
+  font-size: 1.2rem;
+  text-align:center;
+  font-weight: bold;
+  width: 140px;
+}
+
+
+/* chat */
+
+#chatbox{
+  width: 30vw;
+  height: 80%;
+  align-self: center;
+  background-color: white;
+  border-radius: 10px;
+  border: 2px solid;
+}
+
+#messages-container{
+  width: 100%;
+  height: 85%;
+  overflow-y: auto;
+}
+
+#messages{
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: flex-end;
+}
+
+.message{
+  border-radius: 10px;
+  max-width: 80%;
+  padding: 10px;
+  margin: 5px 15px;
+  display: inline-block;
+  opacity: 0.6;
+}
+
+.message .name{
+  color: #aaa;
+  font-size: 0.8rem;
+}
+
+.message .content{
+  font-size: 0.9rem;
+}
+
+.local-message{
+  align-self: flex-end;
+  text-align: right;
+  border-radius: 15px 3px 15px 15px;
+}
+
+.outside-message{
+  align-self: flex-start;
+  text-align: left;
+  border-radius: 15px 15px 15px 3px;
+}
+
+#send{
+  width: 100%;
+  height: 15%;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-around;
+  align-items: center;
+}
+
+#send #messageTXT{
+  outline: none;
+  padding: 10px;
+  width: 70%;
+  border-radius: 20px;
+}
+
+#send #btn-send{
+  height: 36px;
+  width: 36px;
+  outline: none;
+  border: none;
+  border-radius: 100%;
+  transition: 0.2s;
+}
+
+#send #btn-send:hover{
+  transform: translateY(-5px);
+  box-shadow: 0 5px;
+}
+
+#send #btn-send:active{
+  transform: translateY(0);
+  box-shadow: none;
+}
+
+
+/* Modal */
+
+.modal {
+  display: block; 
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%; 
+  height: 100%; 
+  overflow: auto; 
+  background-color: rgb(0,0,0); 
+  background-color: rgba(0,0,0,0.4);
+}
+
+.modal-content {
+  background-color: #fefefe;
+  margin: 15% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 340px;
+}
+
+.modal-content form{
+  width: 100%;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-around;
+}
+
+#username{
+  outline: none;
+  padding: 10px;
+  width: 70%;
+  border-radius: 20px;
+}
+
+#done-username{
+  outline: none;
+  width: 40px;
+  border-radius: 10px;
+  border: none;
+  color: #fff;
+  transition: .2s;
+}
+
+#done-username:hover{
+  transform: translateY(-5px);
+  box-shadow: 0 5px black;
+}
+
+#done-username:active{
+  transform: translateY(0);
+  box-shadow: none;
+}
+
+@media screen and (max-width: 1050px){
+  #mobile-message{
+    display: flex;
+  }
+
+  #modal{
+    display: none;
+  }
+
+  .container{
+    display: none;
+  }
+}
